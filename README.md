@@ -68,7 +68,7 @@ TO_EMAIL = "recipient@email.com"
 
 ```bash
 # Install dependencies
-pip install requests schedule  
+pip install requests schedule\
 # Run the weather service (runs in background)
 python weather_daemon.py
 ```
