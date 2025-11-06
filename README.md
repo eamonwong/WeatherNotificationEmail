@@ -115,7 +115,7 @@ Logs Show:
 - 🔄 Automatic retry status
 
 ---
-![WeatherNotificationEmail ](https://github.com/user-attachments/assets/6ef0a5fe-d2e1-41e0-85d1-82f0782db2fb | width=10)  
+![WeatherNotificationEmail ](https://github.com/user-attachments/assets/6ef0a5fe-d2e1-41e0-85d1-82f0782db2fb|width=10)  
 
 Start your day informed, without lifting a finger. ☕🌤️  
 Sips tea ☺️ 
