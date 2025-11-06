@@ -7,7 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 
 OPENWEATHER_API_KEY = "YOUR_API_KEY_HERE"  # Get from: https://openweathermap.org/api
-CITY = "Your_location" # Your location
+CITY = "your_location" # Your location
 EMAIL_USER = "your_email@gmail.com"  # Your Gmail address
 EMAIL_PASSWORD = "your_app_password"  # Gmail app password
 TO_EMAIL = "recipient@email.com"  # Where to send weather emails
