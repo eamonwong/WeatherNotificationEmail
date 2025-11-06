@@ -100,7 +100,20 @@ The system delivers clean, professional emails with:
 - API keys kept in configuration only
 - All communications over HTTPS
 
+# Troubleshooting
+Common Solutions:
+- "SMTP Error" → Check Gmail App Password
+- "City not found" → Verify city format: "City,CountryCode"
+- "API Error" → Confirm OpenWeatherMap API key is active
 
+Logs Show:
+- ✅ Successful sends with timestamps
+- ❌ Failed attempts with error details
+- 🔄 Automatic retry status
+
+---
+Start your day informed, without lifting a finger. ☕🌤️
+Sips tea ☺️ 
 
 
 
