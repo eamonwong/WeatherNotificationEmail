@@ -8,37 +8,37 @@ import sys
 sys.path.append('/path/to/your/project/directory')
 
 
-def send_weather_with_retry():
+def send_weather():
     try:
-        from weather_cron import send_daily_weather
-        print(f"🕒 Attempting to send weather email at {datetime.now().strftime('%H:%M:%S')}")
+        from weatherEmail import send_daily_weather
+        current_time = datetime.now().strftime('%H:%M:%S')
+        print(f"🕒 [{current_time}] Sending weather email...")
         send_daily_weather()
     except Exception as e:
-        print(f"❌ Failed: {e}")
-        print("🔄 Retrying in 30 seconds...")
-        time.sleep(30)
-        try:
-            send_daily_weather()
-            print("✅ Success on retry!")
-        except Exception as e2:
-            print(f"❌ Failed again: {e2}")
+        print(f"❌ [{current_time}] Error: {e}")
 
 
-def run_reliable_daemon():
+def main():
     print(f"🚀 RELIABLE Weather Daemon Started at {datetime.now()}")
-    print("📧 Will send emails daily at 9:30 AM with retry logic")
+    print("📧 Scheduled: Daily at 09:30")
+    print("💚 Will log every hour to stay alive")
 
-    # Schedule for 9:30 AM daily (changed from 09:00 to 09:30)
-    schedule.every().day.at("09:30").do(send_weather_with_retry)
+    # Schedule for 9:30 AM
+    schedule.every().day.at("09:30").do(send_weather)
 
-    # Also send a test immediately
+    schedule.every().hour.do(lambda: print(f"💚 Alive at {datetime.now().strftime('%H:%M:%S')}"))
+
     print("🚀 Sending test email now...")
-    send_weather_with_retry()
+    send_weather()
 
     while True:
-        schedule.run_pending()
-        time.sleep(60)  # Check every minute
+        try:
+            schedule.run_pending()
+            time.sleep(60)  # Check every minute
+        except Exception as e:
+            print(f"❌ Daemon error: {e}")
+            time.sleep(60)
 
 
 if __name__ == "__main__":
-    run_reliable_daemon()
+    main()
