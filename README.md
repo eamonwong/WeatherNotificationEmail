@@ -117,6 +117,9 @@ Logs Show:
 ---
 ![WeatherNotificationEmail ](https://github.com/user-attachments/assets/6ef0a5fe-d2e1-41e0-85d1-82f0782db2fb)  
 
+![WeatherNotificationEmail(2)](https://github.com/user-attachments/assets/0d763a85-d8f2-4e25-9f7b-8f4ef26a1914)  
+
+
 Start your day informed, without lifting a finger. ☕🌤️  
 Sips tea ☺️ 
 
