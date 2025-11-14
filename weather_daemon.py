@@ -15,29 +15,26 @@ def send_weather():
         print(f"🕒 [{current_time}] Sending weather email...")
         send_daily_weather()
     except Exception as e:
-        print(f"❌ [{current_time}] Error: {e}")
+        print(f"❌ Error: {e}")
 
 
 def main():
-    print(f"🚀 RELIABLE Weather Daemon Started at {datetime.now()}")
+    print(f"🚀 Weather Daemon Started at {datetime.now()}")
     print("📧 Scheduled: Daily at 09:30")
-    print("💚 Will log every hour to stay alive")
 
     # Schedule for 9:30 AM
     schedule.every().day.at("09:30").do(send_weather)
 
-    schedule.every().hour.do(lambda: print(f"💚 Alive at {datetime.now().strftime('%H:%M:%S')}"))
+    # Keep-alive heartbeat
+    schedule.every(30).minutes.do(lambda: print(f"💚 Daemon alive at {datetime.now().strftime('%H:%M:%S')}"))
 
+    # Test immediately
     print("🚀 Sending test email now...")
     send_weather()
 
     while True:
-        try:
-            schedule.run_pending()
-            time.sleep(60)  # Check every minute
-        except Exception as e:
-            print(f"❌ Daemon error: {e}")
-            time.sleep(60)
+        schedule.run_pending()
+        time.sleep(60)
 
 
 if __name__ == "__main__":
