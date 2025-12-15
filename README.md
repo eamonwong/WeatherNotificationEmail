@@ -196,9 +196,12 @@ CronTrigger(hour=8, minute=minute, timezone='Europe/London')
 ## Different Timezone
 ```python
 # Available timezones:
-CronTrigger(hour=9, minute=30, timezone='US/Eastern')    # New York
-CronTrigger(hour=9, minute=30, timezone='Asia/Beijing')    # Beijing
-CronTrigger(hour=9, minute=30, timezone='Australia/Sydney') # Sydney
+CronTrigger(hour=9, minute=30, timezone='Europe/London')      # London, UK
+CronTrigger(hour=9, minute=30, timezone='US/Eastern')         # New York, USA
+CronTrigger(hour=9, minute=30, timezone='Asia/Kuala_Lumpur')  # Kuala Lumpur, Malaysia
+CronTrigger(hour=9, minute=30, timezone='Asia/Shanghai')      # Shanghai, China
+CronTrigger(hour=9, minute=30, timezone='Australia/Sydney')   # Sydney, Australia
+CronTrigger(hour=9, minute=30, timezone='UTC')                # Coordinated Universal Time
 ```
 
 # Example Output 📨
