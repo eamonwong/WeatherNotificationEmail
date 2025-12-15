@@ -74,11 +74,70 @@ TO_EMAIL = "recipient@email.com"
 ### 3. Install & Run
 
 ```bash
-# Install dependencies
-pip install requests schedule
+# Clone or create project directory
+cd /path/to/your/project
 
-# Run the weather service (runs in background)
-python weather_daemon.py
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install apscheduler pytz requests
+
+# Test the script
+python weatherEmail.py
+```
+
+# Deployment as macOS Service 🚀
+## Automated Setup (One Command)
+
+```bash
+# Run setup script (creates everything automatically)
+chmod +x setup_macos_service.sh
+./setup_macos_service.sh
+```
+## Manual macOS Service Setup
+### 1. Create the launchd service file:
+
+```bash
+cat > ~/Library/LaunchAgents/com.user.weatherdaemon.plist << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.weatherdaemon</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/path/to/your/venv/bin/python</string>
+        <string>/path/to/your/project/weather_daemon.py</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/weatherdaemon.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/weatherdaemon.err</string>
+    <key>WorkingDirectory</key>
+    <string>/path/to/your/project</string>
+</dict>
+</plist>
+EOF
+```
+### 2. Load and start the service:
+
+```bash
+launchctl load ~/Library/LaunchAgents/com.user.weatherdaemon.plist
+launchctl start com.user.weatherdaemon
+```
+
+### 3. Verify it's running:
+
+```bash
+launchctl list | grep weather
+# Should show: [PID] 0 com.user.weatherdaemon
 ```
 
 # Example Output 📨
