@@ -28,11 +28,12 @@ TODAY'S FORECAST:
 
 Have a wonderful day! ☀️
 ```
-## ⚡ Reliable Automation
-- Scheduled daily delivery at 9:30 AM (or anytime you chose!)
-- Automatic retry logic for failed sends
-- Error handling for API and network issues
-- Continuous monitoring with detailed logging
+## ⚡ Reliable 24/7 Automation
+- Scheduled delivery: Daily at 9:30 AM (configurable to any time)
+- macOS background service: Runs continuously, survives reboots and terminal closures
+- Sleep-proof scheduling: Catches up if computer was asleep at scheduled time
+- Automatic error recovery: Retry logic for failed API calls or email sends
+- Detailed logging: Comprehensive logs for monitoring and debugging
 
 # Technologies Used 🛠️
 | Component	| Description |
@@ -43,6 +44,11 @@ Have a wonderful day! ☀️
 | APScheduler | Reliable task scheduling |
 | Requests | HTTP API calls to weather service |
 | macOS launchd | Background service management on macOS |
+| Pytz | Timezone handling for accurate scheduling |
+
+# Architecture Overview 🔄
+
+<img width="1660" height="2904" alt="WeatherEmail" src="https://github.com/user-attachments/assets/2ada1987-17a2-4b33-af0e-5bbfddbc2bb7" />
 
 # Quick Setup 🔧
 ## 1. Get Your API Keys
