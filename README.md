@@ -140,6 +140,67 @@ launchctl list | grep weather
 # Should show: [PID] 0 com.user.weatherdaemon
 ```
 
+# Service Management 🔧
+## Monitoring Commands
+
+```bash
+# Check service status
+launchctl list | grep weather
+
+# View real-time logs
+tail -f /tmp/weatherdaemon.err
+
+# Check recent email sends
+grep -i "sending weather email\|sent successfully" /tmp/weatherdaemon.err
+
+# View heartbeat (runs every 30 minutes)
+grep "Daemon alive" /tmp/weatherdaemon.err | tail -1
+```
+
+## Control Commands
+
+```bash
+# Stop the service
+launchctl stop com.user.weatherdaemon
+
+# Start the service
+launchctl start com.user.weatherdaemon
+
+# Restart (full reload)
+launchctl unload ~/Library/LaunchAgents/com.user.weatherdaemon.plist
+launchctl load ~/Library/LaunchAgents/com.user.weatherdaemon.plist
+launchctl start com.user.weatherdaemon
+
+# Remove service completely
+launchctl unload ~/Library/LaunchAgents/com.user.weatherdaemon.plist
+rm ~/Library/LaunchAgents/com.user.weatherdaemon.plist
+```
+## Quick Status Check
+
+```bash
+echo "Service PID: $(ps aux | grep weather_daemon | grep -v grep | awk '{print $2}')"
+echo "Next email: $(grep 'next run at' /tmp/weatherdaemon.err 2>/dev/null | tail -1 | cut -d' ' -f6- || echo 'Not scheduled')"
+echo "Last heartbeat: $(grep 'Daemon alive' /tmp/weatherdaemon.err 2>/dev/null | tail -1 | cut -d' ' -f1-3 || echo 'No heartbeat')"
+```
+
+# Customisation ⚙️
+## Change Schedule Time
+Edit weather_daemon.py:
+
+```python
+#  For 8:00 AM instead of 9:30 AM
+minute = 0  # Change from 30 to 0
+CronTrigger(hour=8, minute=minute, timezone='Europe/London')
+```
+
+## Different Timezone
+```python
+# Available timezones:
+CronTrigger(hour=9, minute=30, timezone='US/Eastern')    # New York
+CronTrigger(hour=9, minute=30, timezone='Asia/Beijing')    # Beijing
+CronTrigger(hour=9, minute=30, timezone='Australia/Sydney') # Sydney
+```
+
 # Example Output 📨
 The system delivers clean, professional emails with:
 - Current Conditions: Real-time temperature, humidity, and wind
