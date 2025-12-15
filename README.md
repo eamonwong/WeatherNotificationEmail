@@ -40,8 +40,9 @@ Have a wonderful day! ☀️
 | Python | Core automation and data processing |
 | OpenWeatherMap API | Real-time weather data and 5-day forecasts |
 | SMTP | Secure email delivery via Gmail |
-| Schedule Library | Automated daily task scheduling |
+| APScheduler | Reliable task scheduling |
 | Requests | HTTP API calls to weather service |
+| macOS launchd | Background service management on macOS |
 
 # Quick Setup 🔧
 ## 1. Get Your API Keys
