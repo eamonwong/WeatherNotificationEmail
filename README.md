@@ -208,38 +208,102 @@ The system delivers clean, professional emails with:
 - Easy Scanning: Bullet-point format for quick reading
 - Friendly Tone: Positive closing message to start your day right
 
+# Security Considerations 🔐
+## Best Practices Implemented
+- ✅ Gmail App Passwords: More secure than regular passwords
+- ✅ API Key Isolation: Keys stored in configuration only
+- ✅ HTTPS Only: All API calls use encrypted connections
+- ✅ No Data Storage: No personal data stored locally
+- ✅ Virtual Environment: Isolated Python dependencies
+
+## Security Recommendations
+- Regularly rotate your Gmail app password
+- Monitor OpenWeatherMap API usage
+- Keep your API keys confidential
+- Use different email for sending/receiving if concerned about privacy
+- Review logs periodically for unusual activity
+
+# Performance & Reliability 📊
+## System Requirements
+- Minimal Resources: Uses < 50MB RAM, < 1% CPU when idle
+- Network: Requires internet connection for API calls
+- Storage: Logs use < 10MB per month
+
+## Uptime Features
+- Auto-restart: macOS launchd keeps service running
+- Sleep recovery: Catches up missed jobs after wakeup
+- Error resilience: Retries failed API calls (3 attempts)
+- Connection timeout: Prevents hanging on network issues
+
+## Monitoring
+- Heartbeat: Logs every 30 minutes confirming service alive
+- Email confirmation: Logs each successful send
+- Error tracking: Detailed error messages with timestamps
+- Scheduler status: Logs next scheduled run time
+
 # Why Choose This System? 🎯
 ## Stop Manual Checking
 - No more opening multiple weather apps
-- Information arrives exactly when you need it
+- Information arrives exactly when you need it (9:30 AM daily)
 - Consistent format makes scanning effortless
+- Eliminates the morning weather-checking ritual
 
-## Stay Prepared
+## Stay Prepared & Informed
 - Know exactly what to wear based on temperatures
 - Plan your day around weather conditions
 - Never be surprised by rain or temperature drops
+- Comprehensive data with current conditions + daily forecast
 
 ## Perfect Integration
 - Works with your existing email habit
-- Minimal setup required
-- Runs reliably in the background
+- Minimal setup required (once and done)
+- Runs reliably in the background 24/7
+- Survives terminal closure and system reboots
 
-# Security 🔐
-- Uses Gmail App Passwords (more secure)
-- No sensitive data stored locally
-- API keys kept in configuration only
-- All communications over HTTPS
+## Privacy & Control (important to me 🙈)
+- Your data stays with you, no third-party analytics
+- Full control over information displayed
+- Customisable to your preferences
+- No tracking of your weather queries
+
+## Technical Advantages
+- True automation - no manual intervention needed
+- Sleep-proof - catches up if computer was asleep
+- Professional quality - clean, formatted emails
+- Enterprise-grade scheduling with APScheduler
 
 # Troubleshooting
 Common Solutions:
-- "SMTP Error" → Check Gmail App Password
-- "City not found" → Verify city format: "City,CountryCode"
-- "API Error" → Confirm OpenWeatherMap API key is active
+- "SMTP Error" → Check Gmail App Password is correct and active
+- "City not found" → Verify city format: "City,CountryCode" (e.g., "London,UK")
+- "API Error" → Confirm OpenWeatherMap API key is active and valid
+- No email at scheduled time → Computer was asleep - add misfire_grace_time=None to scheduler job
+- Multiple emails sent → Duplicate jobs - add replace_existing=True to scheduler job
+- Service not starting → Verify Python and script paths are correct in launchd plist file
+- "ModuleNotFoundError: No module named 'apscheduler'" → Run pip install apscheduler pytz requests
+- Email sends at wrong time → Check timezone in CronTrigger (should match your location)
 
 Logs Show:
 - ✅ Successful sends with timestamps
 - ❌ Failed attempts with error details
 - 🔄 Automatic retry status
+
+Debug Mode:
+For troubleshooting, run manually:
+
+```bash
+
+# Deactivate service first
+launchctl stop com.user.weatherdaemon
+
+# Run in foreground with verbose output
+cd /path/to/your/project
+source venv/bin/activate
+python -v weather_daemon.py
+```
+
+# Project Status
+✅ Production Ready - This system has been running reliably with daily deliveries
 
 ---
 ![WeatherNotificationEmail ](https://github.com/user-attachments/assets/6ef0a5fe-d2e1-41e0-85d1-82f0782db2fb)  
